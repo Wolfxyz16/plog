@@ -58,11 +58,62 @@ page_style -->
             text-decoration: underline;
         }
 
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+
+        th {
+            text-align: left;
+            font-size: 0.85rem;
+            color: #555;
+            font-weight: 600;
+            padding-bottom: 0.6rem;
+        }
+
+        td {
+            padding: 0.45rem 0;
+            vertical-align: top;
+        }
+
+        td.title a {
+            font-size: 1rem;
+            line-height: 1.4;
+            text-decoration: none;
+            font-family: 'Georgia', serif;
+            font-weight: 500;
+        }
+
+        td.title a:hover {
+            text-decoration: underline;
+        }
+
+        td.time {
+            font-size: 0.8rem;
+            color: #666;
+            white-space: nowrap;
+            min-width: 170px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        }
+
+        td.desc {
+            font-family: 'Georgia', serif;
+            font-size: 0.85rem;
+            color: #777;
+            line-height: 1.4;
+            max-width: 420px;
+            padding-left: 1.2rem;
+            font-style: italic;
+        }
+
         #meta {
             font-family: 'SF Mono','Menlo',monospace;
             font-size: 0.75rem;
             color: #777;
             margin-bottom: 1.5rem;
+            max-width: 900px;
+            line-height: 1.2;
         }
 
         #meta code {

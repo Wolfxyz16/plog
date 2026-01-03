@@ -14,6 +14,7 @@
 
 :- http_handler(root(.), list_blogs, []).
 :- http_handler(root(blogs), list_blog, []).
+:- http_handler(root('rss.xml'), rss_handler, []).
 
 :- multifile http:location/3.
 http:location(images, root(images), []).
@@ -33,6 +34,11 @@ image_handler(Request) :-
 content_handler(Request) :-
     http_reply_from_files('contents', [], Request).
 
+rss_handler(_) :-
+    generate_rss(XML),
+    format('Content-type: application/rss+xml~n~n'),
+    format('~w', [XML]).
+
 content_files(Files) :-
     absolute_file_name(contents, Dir, [ file_type(directory), access(read)]),
     directory_files(Dir, Raw),
@@ -47,7 +53,7 @@ file_info(File, Size, Modified) :-
 
 format_timestamp(Stamp, Time) :-
     stamp_date_time(Stamp, DT, 'UTC'),
-    format_time(string(Time), "%Y-%m-%d %H:%M:%S", DT).
+    format_time(string(Time), '%Y-%m-%d %H:%M:%S', DT).
 
 server(Port) :-
     http_server(http_dispatch, [port(Port)]),
@@ -55,7 +61,7 @@ server(Port) :-
 
 list_blogs(_Request) :-
     content_files(Files),
-    predsort(compare, Files, Sorted),
+    predsort(compare_by_published_desc, Files, Sorted),
     reply_html_page(
         title('BlauAnarchy\'s Blogs'),
         [ \page_style ],
@@ -79,18 +85,23 @@ list_blogs(_Request) :-
     ).
 
 header --> 
-    html(tr([th('Title'), th('Last Updated At')])).
+    html(tr([   th([class(title)], 'Title'), th([class(desc)],  ''), th([class(time)], 'Last Updated At')])).
 
 blogs([]) --> [].
 blogs([H|T]) --> 
     {get_blog_display_name(H, H0)},
-    html(tr([td(\blog_link(H0, H)), td(\get_published_at(H))])),
+    html(tr([td([class(title)], \blog_link(H0, H)), td([class(desc)], ''), td([class(time)], \get_published_at(H))])),
     blogs(T).
 
 get_published_at(Blog) -->
     { file_info(Blog, _, Created) },
     { format_timestamp(Created, CreatedFormatted) },
     html(CreatedFormatted).
+
+compare_by_published_desc(Order, BlogA, BlogB) :-
+    file_info(BlogA, _, TimeA),
+    file_info(BlogB, _, TimeB),
+    compare(Order, TimeB, TimeA).
 
 blog_link(Blog, Display) -->
     { http_link_to_id(list_blog, [name=Display], HREF) },
@@ -172,10 +183,66 @@ render_paragraphs([Line|Rest], [HTML|Out]) :-
 
 get_blog_display_name(Blog, Path) :-
     re_replace("_" /g , " ", Blog, Path0),
-    re_replace(".pl" /g , "", Path0, Path1),
-    string_upper(Path1, Path).
+    re_replace(".pl" /g , "", Path0, Path).
+    %string_upper(Path1, Path).
 
 read_blog_files(Blog, Paragraphs) :-
     format(string(Path), "contents/~w", [Blog]),
     consult(Path),
     findall(P, content(P), Paragraphs).
+
+site_title('BlauAnarchy\'s Blogs').
+site_link('https://blauanarchy.org').
+site_description('A Blog site on Symbolic Coherence, written in pure prolog.').
+
+generate_rss(XML) :-
+    site_title(Title),
+    site_link(Root),
+    site_description(Desc),
+    atomic_list_concat([Root, '/rss.xml'], FeedURL),
+
+    content_files(Files),
+    predsort(compare_by_published_desc, Files, Sorted),
+
+    findall(Item,
+        ( member(Blog, Sorted),
+          rss_item(Blog, Item)
+        ),
+        Items),
+
+    atomic_list_concat(Items, "\n", ItemsXML),
+
+    format(string(XML),
+'<?xml version=\'1.0\' encoding=\'ISO-8859-1\'?>
+<rss version=\'2.0\' xmlns:atom=\'http://www.w3.org/2005/Atom\'>
+<channel>
+<title>~w</title>
+<link>~w</link>
+<description>~w</description>
+<atom:link href=\'~w\' rel=\'self\' type=\'application/rss+xml\' />
+~w
+</channel>
+</rss>',
+    [Title, Root, Desc, FeedURL, ItemsXML]).
+
+
+rss_date(Timestamp, RSS) :-
+    stamp_date_time(Timestamp, DT, 'UTC'),
+    format_time(string(RSS),
+        '%a, %d %b %Y %H:%M:%S GMT', DT).
+
+rss_item(BlogFile, XML) :-
+    get_blog_display_name(BlogFile, Display),
+    file_info(BlogFile, _, Created),
+    rss_date(Created, PubDate),
+    http_link_to_id(list_blog, [name=BlogFile], RelLink),
+    site_link(Root),
+    uri_resolve(RelLink, Root, Link),
+    format(string(XML),
+'<item>
+<title>~w</title>
+<link>~w</link>
+<pubDate>~w</pubDate>
+<guid isPermaLink="true">~w</guid>
+</item>',
+    [Display, Link, PubDate, Link]).
