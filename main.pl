@@ -63,15 +63,16 @@ list_blogs(_Request) :-
     content_files(Files),
     predsort(compare_by_published_desc, Files, Sorted),
     reply_html_page(
-        title('BlauAnarchy\'s Blogs'),
+    title('Yeray Li Loaiza'),
         [ \page_style ],
         [
-            div([id(content)], [
-                h1('BlauAnarchy\'s Blogs'),
-                div([id(meta)], [
-                    span('This page was assembled dynamically by a SWI-Prolog server using the http/html_write library.
-                    The system reads Markdown files from the contents/ directory, converts them into structured HTML through a Markdown parser written from scratch, and generates the layout at runtime without templates or external frameworks. '),
-                    a([href('https://github.com/cryptoque/prolog-blog-engine'), target('_blank')], '\nCheck out the source on GitHub')
+            main([id(content)], [
+                h1('Yeray Li Loaiza'),
+		h3('AI Developer and software libre enthusiast'),
+                section([id(meta)], [
+		    p('Welcome to my personal web page. Here you will find the projects I am currently working on and you can read about my opinion in different topics. Take a seat and enjoy!'),
+		    img([src('/images/profile.jpg'), width(416), height(624), alt('picture of me in Shanghai!')]),
+		    p(a([href('https://github.com/cryptoque/prolog-blog-engine'), target('_blank')], 'This blog has been created using this awesome project!'))
                 ]),
 
                 table(
@@ -191,9 +192,9 @@ read_blog_files(Blog, Paragraphs) :-
     consult(Path),
     findall(P, content(P), Paragraphs).
 
-site_title('BlauAnarchy\'s Blogs').
-site_link('https://blauanarchy.org').
-site_description('A Blog site on Symbolic Coherence, written in pure prolog.').
+site_title('Yeray Li Loaiza web').
+site_link('https://yerayliloaiza.me').
+site_description('My own personal web, written in pure prolog.').
 
 generate_rss(XML) :-
     site_title(Title),

@@ -7,11 +7,23 @@
 
 page_style -->
     html(style(type('text/css'), "
+    	@font-face {
+	    font-family: 'Space Grotesk';
+	    src: url('fonts/SpaceGrotesk-Medium.woff2') format('woff2');
+	    font-weight: 500;
+	    font-style: normal;
+	    font-display: swap;
+	}
+
         body {
             margin: 0;
             font-family: Cantarell, sans-serif;
             background: #fafafa;
         }
+
+	h1, h2, h3, h4, h5, h6 {
+	    font-family: 'Space Grotesk';
+	}
 
         #content {
             max-width: 60rem;
