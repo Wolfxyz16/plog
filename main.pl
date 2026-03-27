@@ -10,7 +10,9 @@
 :- use_module(library(pcre)).
 :- use_module(library(http/http_path)).
 :- use_module(library(http/http_files)).
+
 :- use_module(style).
+:- use_module(md_parser).
 
 :- http_handler(root(.), list_blogs, []).
 :- http_handler(root(blogs), list_blog, []).
@@ -71,7 +73,7 @@ list_blogs(_Request) :-
 		h3('AI Developer and software libre enthusiast'),
                 section([id(meta)], [
 		    p('Welcome to my personal web page. Here you will find the projects I am currently working on and you can read about my opinion in different topics. Take a seat and enjoy!'),
-		    img([src('/images/profile.jpg'), width(416), height(624), alt('picture of me in Shanghai!')]),
+		    img([src('/images/profile.webp'), width(416), height(624), alt('picture of me in Shanghai!')]),
 		    p(a([href('https://github.com/cryptoque/prolog-blog-engine'), target('_blank')], 'This blog has been created using this awesome project!'))
                 ]),
 
@@ -118,73 +120,14 @@ list_blog(Request) :-
         title('Title: ~w'-[Blog]),
         [ \blog_style ],
         [ 
-          div(id(content), HtmlParagraphs)
+          main(id(content), HtmlParagraphs)
         ]
-    ).
-
-render_paragraphs([], []).
-render_paragraphs([Line|Rest], [HTML|Out]) :-
-    (
-        re_matchsub("^# +(.*)", Line, D, []) -> HTML = h1(D.get(1));
-        re_matchsub("^## +(.*)", Line, D, []) -> HTML = h2(D.get(1));
-        re_matchsub("^### +(.*)", Line, D, []) -> HTML = h3(D.get(1));
-        re_matchsub("^> +(.*)", Line, D, []) -> HTML = blockquote(p(D.get(1)));
-        re_matchsub("^---$", Line, _, []) -> HTML = hr([]);
-        inline(Line, Parts),
-        HTML = p(Parts)
-
-    ),
-    render_paragraphs(Rest, Out).
-
-    inline(Line, Parts) :-
-    (   re_matchsub("^(.*?)\\!\\[(.*?)\\]\\((.*?)\\)(.*)$", Line, D, []) ->
-        B = D.get(1),
-        T = D.get(2),
-        U = D.get(3),
-        A = D.get(4),
-        inline(B, PBefore),
-        inline(A, PAfter),
-        append(PBefore, [img([src(U), width('450'), height('400'), alt(T)])|PAfter], Parts);
-   
-        re_matchsub("^(.*?)\\[(.*?)\\]\\((.*?)\\)(.*)$", Line, D, []) ->
-        B = D.get(1),
-        T = D.get(2),
-        U = D.get(3),
-        A = D.get(4),
-        inline(B, PBefore),
-        inline(A, PAfter),
-        append(PBefore, [a([href(U)], T)|PAfter], Parts);
-   
-        re_matchsub("^(.*?)`(.*?)`(.*)$", Line, D, []) ->
-        B = D.get(1),
-        M = D.get(2),
-        A = D.get(3),
-        inline(B, PBefore),
-        inline(A, PAfter),
-        append(PBefore, [code(M)|PAfter], Parts);
-
-        re_matchsub("^(.*?)\\*\\*(.*?)\\*\\*(.*)$", Line, D, []) ->
-        B = D.get(1),
-        M = D.get(2),
-        A = D.get(3),
-        inline(B, PBefore),
-        inline(A, PAfter),
-        append(PBefore, [b(M)|PAfter], Parts);
-    
-        re_matchsub("^(.*?)_(.*?)_(.*)$", Line, D, []) ->
-        B = D.get(1),
-        M = D.get(2),
-        A = D.get(3),
-        inline(B, PBefore),
-        inline(A, PAfter),
-        append(PBefore, [i(M)|PAfter], Parts);
-        
-        Parts = [Line]
     ).
 
 get_blog_display_name(Blog, Path) :-
     re_replace("_" /g , " ", Blog, Path0),
-    re_replace(".pl" /g , "", Path0, Path).
+    re_replace("-" /g , " ", Path0, Path1),
+    re_replace("\\.pl" /g , "", Path1, Path).
     %string_upper(Path1, Path).
 
 read_blog_files(Blog, Paragraphs) :-
@@ -194,7 +137,7 @@ read_blog_files(Blog, Paragraphs) :-
 
 site_title('Yeray Li Loaiza web').
 site_link('https://yerayliloaiza.me').
-site_description('My own personal web, written in pure prolog.').
+site_description('My own personal web, written in pure prolog :)').
 
 generate_rss(XML) :-
     site_title(Title),
