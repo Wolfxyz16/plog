@@ -15,6 +15,26 @@ page_style -->
 	    font-display: swap;
 	}
 
+        figure {
+            margin: 0;
+            padding: 0;
+            width: fit-content;
+            max-width: 50%;
+            border: 1px solid #ccc;
+        }
+
+        figure img {
+            display: block;
+            max-width: 100%;
+            border-radius: 4px;
+        }
+
+        figcaption {
+            padding: 8px;
+            text-align: center;
+            background: #f4f4f4;
+        }
+
         body {
             margin: 0;
             font-family: Cantarell, sans-serif;

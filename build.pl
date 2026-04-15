@@ -55,7 +55,7 @@ main_body(SortedFiles) -->
         section([id(meta)], [
           p('Welcome to my personal web page. Here you will find the projects I am currently working on and you can read about my opinion in different topics. Take a seat and enjoy!'),
           figure([], [
-            img([src('/images/profile.webp'), width(416), height(624), alt('picture of me in Shanghai!')]),
+            img([src('/images/profile.webp'), alt('picture of me in Shanghai!')]),
             figcaption(a([href('https://github.com/cryptoque/prolog-blog-engine'), target('_blank')], 'This blog has been created using this awesome project!'))
           ])
         ]),
