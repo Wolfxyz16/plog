@@ -1,3 +1,7 @@
+% Copyright © 2026 wolfxyz
+% Licensed under the Apache License 2.0.
+% See the LICENSE file for details or http://www.apache.org/licenses/LICENSE-2.0.
+
 :- module(md_parser, [render_paragraphs/2]).
 
 render_paragraphs([], []).
@@ -41,7 +45,7 @@ inline(Line, Parts) :-
     A = D.get(4),
     inline(B, PBefore),
     inline(A, PAfter),
-    append(PBefore, [img([src(U), width('450'), height('400'), alt(T)])|PAfter], Parts);
+    append(PBefore, [figure([img([src(U), alt(T), class(cover)]), figcaption(T)])|PAfter], Parts);
 
     re_matchsub("^(.*?)\\[(.*?)\\]\\((.*?)\\)(.*)$", Line, D, []) ->
     B = D.get(1),

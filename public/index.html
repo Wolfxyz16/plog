@@ -1,13 +1,9 @@
-% Copyright © 2025 Zhongying Qiao
-% Licensed under the Apache License 2.0.
-% See the LICENSE file or http://www.apache.org/licenses/LICENSE-2.0.
-
-:- module(style, [page_style//0, blog_style//0]).
-:- use_module(library(http/html_write)).
-
-page_style -->
-    html(style(type('text/css'), 
-    " @font-face {
+<!DOCTYPE html>
+<html>
+<head>
+<title>Yeray Li Loaiza</title>
+<style type="text/css">
+ @font-face {
 	    font-family: 'Space Grotesk';
 	    src: url('fonts/SpaceGrotesk-Medium.woff2') format('woff2');
 	    font-weight: 500;
@@ -142,42 +138,31 @@ page_style -->
         #meta a:hover {
             color: #000;
         }
-    ")).
+    
+</style>
 
-blog_style -->
-    html(style("
-        body {
-            margin: 0;
-            background: #fafafa;
-            font-family: Georgia, serif;
-            line-height: 1.55;
-        }
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
-        #content {
-            max-width: 60rem;
-            margin: 3rem auto;
-            padding: 0 1.5rem;
-        }
+</head>
+<body>
+<header id="header">
 
-        img.cover {
-            display: block;
-            margin: 2rem auto;
-            max-width: 100%;
-            border-radius: 4px;
-        }
+<h1>Yeray Li Loaiza</h1>
 
-        h1 {
-            margin-bottom: 0.3rem;
-            font-size: 2.3rem;
-            line-height: 1.1;
-        }
+<h3>AI Developer and software libre enthusiast</h3>
 
-        h2 {
-            margin-top: 2.4rem;
-            font-size: 1.4rem;
-        }
+</header><main id="content"><section id="meta">
 
-        a {
-            color: #2b3ebf;
-        }
-    ")).
+<p>
+Welcome to my personal web page. Here you will find the projects I am currently working on and you can read about my opinion in different topics. Take a seat and enjoy!</p><figure><img src="/images/profile.webp" width="416" height="624" alt="picture of me in Shanghai!"><figcaption><a href="https://github.com/cryptoque/prolog-blog-engine" target="_blank">This blog has been created using this awesome project!</a></figcaption></figure></section>
+
+<table>
+<tr><th class="title">Title</th><th class="desc"></th><th class="time">Last Updated At</th></tr>
+<tr><td class="title"><a href="/blogs?name=another_plog_update">another plog update</a></td><td class="desc"></td><td class="time">2026-04-15 00:39:18</td></tr>
+<tr><td class="title"><a href="/blogs?name=contribution_to_plog">contribution to plog</a></td><td class="desc"></td><td class="time">2026-04-13 23:45:56</td></tr>
+<tr><td class="title"><a href="/blogs?name=my_very_first_post">my very first post</a></td><td class="desc"></td><td class="time">2026-04-13 23:45:52</td></tr>
+</table>
+
+</main>
+</body>
+</html>

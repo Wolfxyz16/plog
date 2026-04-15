@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>contribution to plog</title>
+<style>
+
+        body {
+            margin: 0;
+            background: #fafafa;
+            font-family: Georgia, serif;
+            line-height: 1.55;
+        }
+
+        #content {
+            max-width: 60rem;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
+
+        img.cover {
+            display: block;
+            margin: 2rem auto;
+            max-width: 100%;
+            border-radius: 4px;
+        }
+
+        h1 {
+            margin-bottom: 0.3rem;
+            font-size: 2.3rem;
+            line-height: 1.1;
+        }
+
+        h2 {
+            margin-top: 2.4rem;
+            font-size: 1.4rem;
+        }
+
+        a {
+            color: #2b3ebf;
+        }
+    
+</style>
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+<body>
+<article id="content">
+
+<h1>Plog update</h1>
+
+<p>
+I bring good news lovely prolog developers! This prolog blog system (plog) has recivied new updates that I am going to enumerate right now.</p>
+
+<p>
+First of all, I have updated the markdown parser and it can now recognize <strong>codeblocks</strong>! This one was a bit tricky because it involved creating a new rule that stored all the lines read between two fenced codeblocks. For example, I can easily copy the new prolog rule and it will be rendered inside a <code>&lt;pre&gt;&lt;code&gt;</code> tag:</p>
+
+<pre>
+<code class="prolog">collect_code_block([Line|Rest], [], Rest) :-
+    string_concat('```', _, Line), !.
+collect_code_block([], [], []).
+collect_code_block([Line|Rest], [Line|CodeRest], Remaining) :-
+    collect_code_block(Rest, CodeRest, Remaining).</code></pre>
+
+<blockquote>
+
+<p>
+I guess more post styles will be coming soon...</p>
+</blockquote>
+
+<p>
+Another small changed is that the <strong>strong</strong> and <em>italic</em> tags are rendered as <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code> respectively. This makes the web a more accesible place everyone, specially screen-reader users.</p>
+
+<p>
+Also, new lines are correctly displayed. Previous version would create an empty <code>&lt;p&gt;</code> tag for every blank line in the markdown file.</p>
+
+<p>
+The final change, I have refactored the code base and all the markdown renderer logic lives inside the <code>md_parser.pl</code> file. The <code>main.pl</code> was getting too large imo and one can get easily lost trying to understand all prolog rules interactions.</p>
+
+<p>
+Ordered and unordered list will be my next objective, as well as an easier customization for anyone who wants to deploy it's own plog instance. Any contribution is welcomed, so feel free to make any PR or open any issue.</p>
+
+<p>
+Nothing further to add,</p>
+
+<p>
+Yeray</p></article>
+</body>
+</html>
