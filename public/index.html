@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Yeray Li Loaiza</title>
+<title>~yeray</title>
 <style type="text/css">
  @font-face {
 	    font-family: 'Space Grotesk';
@@ -11,9 +11,12 @@
 	    font-display: swap;
 	}
 
+	* {
+	    margin: 0;
+	    padding: 0;
+	}
+
         figure {
-            margin: 0;
-            padding: 0;
             width: fit-content;
             max-width: 50%;
             border: 1px solid #ccc;
@@ -48,56 +51,33 @@
         }
 
         h1 {
-            margin: 0 0 2rem 0;
+            font-size: 5rem;
+        }
+
+        h2 {
+            font-size: 3.5rem;
+        }
+
+        h3 {
             font-size: 2.5rem;
         }
 
-        table.blog_index {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.95rem;
-        }
-
-        table.blog_index th,
-        table.blog_index td {
-            padding: 0.4rem 0.2rem;
-        }
-
-        table.blog_index thead th {
-            border-bottom: 2px solid #222;
-        }
-
-        table.blog_index tbody tr:hover {
-            background: #f0f0f0;
-        }
-
-        table.blog_index td.date {
-            text-align: right;
-            white-space: nowrap;
-            padding-left: 1rem;
-        }
-
-        table.blog_index a {
-            text-decoration: none;
-            color: #2b3ebf;
-        }
-
-        table.blog_index a:hover {
-            text-decoration: underline;
+        p {
+            font-size: 2rem;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 2rem;
+            font-size: 2rem;
         }
 
         th {
             text-align: left;
-            font-size: 0.85rem;
             color: #555;
             font-weight: 600;
-            padding-bottom: 0.6rem;
+	    border-bottom: 0.2rem solid;
         }
 
         td {
@@ -106,7 +86,6 @@
         }
 
         td.title a {
-            font-size: 1rem;
             line-height: 1.4;
             text-decoration: none;
             font-family: 'Georgia', serif;
@@ -118,7 +97,6 @@
         }
 
         td.time {
-            font-size: 0.8rem;
             color: #666;
             white-space: nowrap;
             min-width: 170px;
@@ -127,7 +105,6 @@
 
         td.desc {
             font-family: 'Georgia', serif;
-            font-size: 0.85rem;
             color: #777;
             line-height: 1.4;
             max-width: 420px;
@@ -137,11 +114,13 @@
 
         #meta {
             font-family: 'SF Mono','Menlo',monospace;
-            font-size: 0.75rem;
             color: #777;
             margin-bottom: 1.5rem;
             max-width: 900px;
             line-height: 1.2;
+	    display: flex;
+	    flex-flow: column nowrap;
+	    gap: 1rem;
         }
 
         #meta code {
@@ -162,8 +141,7 @@
 </style>
 
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<script defer src="https://umami.yerayliloaiza.cc/script.js" data-website-id="18f64e61-7751-47d3-ad01-44f7532d3015"></script>
-	
+
 </head>
 <body>
 <header id="header">
@@ -175,13 +153,13 @@
 </header><main id="content"><section id="meta">
 
 <p>
-Welcome to my personal web page. Here you will find the projects I am currently working on and you can read about my opinion in different topics. Take a seat and enjoy!</p><figure><img src="/images/profile.webp" alt="picture of me in Shanghai!"><figcaption><a href="https://github.com/cryptoque/prolog-blog-engine" target="_blank">This blog has been created using this awesome project!</a></figcaption></figure></section>
+Welcome to my personal web page. Here you will find the projects I am currently working on and you can read about my opinion in different topics. Take a seat and enjoy!</p><figure><img src="/images/profile.webp" alt="Picture of myself in a taiwanese elevator"><figcaption>pic of me!</figcaption></figure></section>
 
 <table>
 <tr><th class="title">Title</th><th class="desc"></th><th class="time">Last Updated At</th></tr>
-<tr><td class="title"><a href="/blogs?name=another_plog_update">another plog update</a></td><td class="desc"></td><td class="time">2026-04-15 00:41:11</td></tr>
-<tr><td class="title"><a href="/blogs?name=contribution_to_plog">contribution to plog</a></td><td class="desc"></td><td class="time">2026-04-13 23:45:56</td></tr>
-<tr><td class="title"><a href="/blogs?name=my_very_first_post">my very first post</a></td><td class="desc"></td><td class="time">2026-04-13 23:45:52</td></tr>
+<tr><td class="title"><a href="/blogs?name=another_plog_update">Another Plog update</a></td><td class="desc"></td><td class="time">2026-4-15</td></tr>
+<tr><td class="title"><a href="/blogs?name=contribution_to_plog">Contribution to plog</a></td><td class="desc"></td><td class="time">2026-3-27</td></tr>
+<tr><td class="title"><a href="/blogs?name=my_very_first_post">My very first post</a></td><td class="desc"></td><td class="time">2026-3-8</td></tr>
 </table>
 
 </main>

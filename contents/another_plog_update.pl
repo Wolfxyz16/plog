@@ -1,4 +1,11 @@
-content("![landscape in Arrigunaga](/images/arrigunaga.webp)
+:- dynamic build:content/1.
+
+title("Another Plog update").
+date(2026, 4, 15).
+author("wolfxyz").
+
+content("
+![landscape in Arrigunaga](/images/arrigunaga.webp)
 
 # Another update comes to Plog today!
 

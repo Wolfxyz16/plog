@@ -15,9 +15,12 @@ page_style -->
 	    font-display: swap;
 	}
 
+	* {
+	    margin: 0;
+	    padding: 0;
+	}
+
         figure {
-            margin: 0;
-            padding: 0;
             width: fit-content;
             max-width: 50%;
             border: 1px solid #ccc;
@@ -52,56 +55,33 @@ page_style -->
         }
 
         h1 {
-            margin: 0 0 2rem 0;
+            font-size: 5rem;
+        }
+
+        h2 {
+            font-size: 3.5rem;
+        }
+
+        h3 {
             font-size: 2.5rem;
         }
 
-        table.blog_index {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.95rem;
-        }
-
-        table.blog_index th,
-        table.blog_index td {
-            padding: 0.4rem 0.2rem;
-        }
-
-        table.blog_index thead th {
-            border-bottom: 2px solid #222;
-        }
-
-        table.blog_index tbody tr:hover {
-            background: #f0f0f0;
-        }
-
-        table.blog_index td.date {
-            text-align: right;
-            white-space: nowrap;
-            padding-left: 1rem;
-        }
-
-        table.blog_index a {
-            text-decoration: none;
-            color: #2b3ebf;
-        }
-
-        table.blog_index a:hover {
-            text-decoration: underline;
+        p {
+            font-size: 2rem;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 2rem;
+            font-size: 2rem;
         }
 
         th {
             text-align: left;
-            font-size: 0.85rem;
             color: #555;
             font-weight: 600;
-            padding-bottom: 0.6rem;
+	    border-bottom: 0.2rem solid;
         }
 
         td {
@@ -110,7 +90,6 @@ page_style -->
         }
 
         td.title a {
-            font-size: 1rem;
             line-height: 1.4;
             text-decoration: none;
             font-family: 'Georgia', serif;
@@ -122,7 +101,6 @@ page_style -->
         }
 
         td.time {
-            font-size: 0.8rem;
             color: #666;
             white-space: nowrap;
             min-width: 170px;
@@ -131,7 +109,6 @@ page_style -->
 
         td.desc {
             font-family: 'Georgia', serif;
-            font-size: 0.85rem;
             color: #777;
             line-height: 1.4;
             max-width: 420px;
@@ -141,11 +118,13 @@ page_style -->
 
         #meta {
             font-family: 'SF Mono','Menlo',monospace;
-            font-size: 0.75rem;
             color: #777;
             margin-bottom: 1.5rem;
             max-width: 900px;
             line-height: 1.2;
+	    display: flex;
+	    flex-flow: column nowrap;
+	    gap: 1rem;
         }
 
         #meta code {

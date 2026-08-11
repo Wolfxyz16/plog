@@ -1,3 +1,9 @@
+:- dynamic content/1.
+
+title("My very first post").
+date(2026, 3, 8).
+author("wolfxyz").
+
 content("
 # Welcome to my blog
 

@@ -1,3 +1,9 @@
+:- dynamic content/1.
+
+title("Contribution to plog").
+date(2026, 3, 27).
+author("wolfxyz").
+
 content("
 # Plog update
 
@@ -23,6 +29,5 @@ The final change, I have refactored the code base and all the markdown renderer 
 
 Ordered and unordered list will be my next objective, as well as an easier customization for anyone who wants to deploy it's own plog instance. Any contribution is welcomed, so feel free to make any PR or open any issue.
 
-Nothing further to add,
-Yeray
+Nothing further to add
 ").
