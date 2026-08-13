@@ -15,7 +15,7 @@
 % home page definition and html generation
 home_page(Blogs) :-
     predsort(compare_by_published_desc, Blogs, SortedBlogs),
-    Head = [title('~yeray'), \page_style],
+    Head = [title('~yeray'), script([defer, src('https://umami.yerayliloaiza.cc/script.js'), 'data-website-id'('18f64e61-7751-47d3-ad01-44f7532d3015')], []), \page_style],
     Body = [\main_body(SortedBlogs)],
     phrase(page(Head, Body), Tokens),
     print_html(Tokens).
