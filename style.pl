@@ -145,11 +145,36 @@ page_style -->
 
 blog_style -->
     html(style("
+    	html {
+	    font-size: clamp(14px, 0.8rem + 0.5vw, 18px);
+	}
+
         body {
             margin: 0;
             background: #fafafa;
             font-family: Georgia, serif;
-            line-height: 1.55;
+	    font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        h1 {
+	    font-family: 'Space Grotesk';
+            margin-bottom: 0.3rem;
+            font-size: 2.3rem;
+        }
+
+        h2 {
+	    font-family: 'Space Grotesk';
+            margin-top: 2.4rem;
+            font-size: 1.75rem;
+        }
+
+	p {
+	    font-size: 1.125rem;
+	}
+
+        a {
+            color: #2b3ebf;
         }
 
         #content {
@@ -160,23 +185,23 @@ blog_style -->
 
         img.cover {
             display: block;
-            margin: 2rem auto;
             max-width: 100%;
             border-radius: 4px;
         }
 
-        h1 {
-            margin-bottom: 0.3rem;
-            font-size: 2.3rem;
-            line-height: 1.1;
-        }
+	figure {
+	  margin: 0;
+	  display: inline-block;
+	}
 
-        h2 {
-            margin-top: 2.4rem;
-            font-size: 1.4rem;
-        }
+	figure img {
+	  display: block;
+	  width: 100%;
+	}
 
-        a {
-            color: #2b3ebf;
-        }
+	figcaption {
+	  margin-top: 0.4rem;
+	  font-size: 0.85rem;
+	  opacity: 0.8;
+	}
     ")).
